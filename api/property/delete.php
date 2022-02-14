@@ -6,30 +6,29 @@
     header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
     include_once '../../config/Database.php';
-    include_once '../../models/Agent.php';
+    include_once '../../models/Property.php';
 
     // Instantiate DB & connect
     $database = new Database();
     $db = $database->connect();
 
     // Instantiate new post object
-    $post = new Agent($db);
+    $property = new Property($db);
 
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
     // Set ID to update
-    $post->id = $data->id;
+    $property->id = $data->id;
 
     // Delete post
-    if ($post->delete()) {
+    if ($property->delete()) {
         echo json_encode(
-            array('message' => 'Post Deleted')
+            array('message' => 'Property Deleted')
         );
     } else {
         echo json_encode(
-            array('message' => 'Post Not Deleted')
+            array('message' => 'Property Not Deleted')
             );
     }
-    
     

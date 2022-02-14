@@ -14,7 +14,7 @@
     $property = new Property($db);
 
     // Property query
-    $result = $proerty->read();
+    $result = $property->read();
     //Get row count
     $num = $result->rowCount();
 
@@ -31,7 +31,8 @@
                 'id' => $id,
                 'price' => $price,
                 'address' => $address,
-                'area' => $area                
+                'area' => $area,
+                'agent' => $agent                
             );
             
             // Push to "data"

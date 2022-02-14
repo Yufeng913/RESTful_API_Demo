@@ -1,6 +1,6 @@
 <?php
     class Agent {
-        //
+        // DB
         private $conn;
         private $table = 'agent';
 
@@ -17,7 +17,7 @@
             $this->conn = $db;
         }
 
-        //
+        // 
         public function read() {
             //
             $query = 'SELECT 
@@ -44,7 +44,7 @@
         
         }
 
-        // Get Single Post
+        // Get single query
         public function read_single(){
              //
              $query = 'SELECT 
@@ -73,14 +73,14 @@
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Set properties
+        // Set table values
         $this->agent_name = $row['agent_name'];
         $this->age = $row['age'];
         $this->email = $row['email'];
         $this->category_id = $row['category_id'];
         }
 
-        // Create Post
+        // Create Agent
         public function create() {
             // Create query
             $query = 'INSERT INTO ' .
@@ -116,7 +116,7 @@
             return false;
         }
 
-        // Update Post
+        // Update Agent
         public function update() {
             // Update query
             $query = 'UPDATE ' .
@@ -156,7 +156,7 @@
             return false;
         }
 
-        // Delete Post
+        // Delete Agent
         public function delete() {
             // Create query
             $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
