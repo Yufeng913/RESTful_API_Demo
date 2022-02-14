@@ -1,8 +1,8 @@
 <?php
-    class Property {
-        //DB stuff
+    class Listing {
+        
         private $conn;
-        private $table = 'property';
+        private $table = 'listing';
 
         // Properties
         public $id;
@@ -10,6 +10,7 @@
         public $address;
         public $area;
         public $agent;
+        public $available;
         public $created_at;
 
         // Constructor with DB
@@ -17,7 +18,7 @@
             $this->conn = $db;
         }
 
-        // Get properties
+        // Get listing
         public function read() {
             // Create query
             $query = 'SELECT
@@ -26,11 +27,12 @@
                 address,
                 area,
                 agent,
+                available,
                 created_at
             FROM
                 ' . $this->table . '
-            ORDER BY
-                created_at DESC';
+            WHERE
+                available="YES"';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -41,7 +43,7 @@
             return $stmt;
         }
 
-        // Create Property
+        // Create Listing
         public function create() {
             // Create query
             $query = 'INSERT INTO ' .
@@ -50,7 +52,8 @@
                     price = :price,
                     address = :address,
                     area = :area,
-                    agent = :agent';
+                    agent = :agent,
+                    available = :available';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -60,12 +63,14 @@
             $this->address = htmlspecialchars(strip_tags($this->address));
             $this->area = htmlspecialchars(strip_tags($this->area));
             $this->agent = htmlspecialchars(strip_tags($this->agent));
+            $this->available = htmlspecialchars(strip_tags($this->available));
 
             // Bind Data
             $stmt->bindParam(':price', $this->price);
             $stmt->bindParam(':address', $this->address);
             $stmt->bindParam(':area', $this->area);
             $stmt->bindParam(':agent', $this->agent);
+            $stmt->bindParam(':available', $this->available);
 
             // Execute query
             if($stmt->execute()) {
@@ -77,7 +82,7 @@
             return false;
         }
 
-        // Update Property
+        // Update Listing
         public function update() {
             // Update query
             $query = 'UPDATE ' .
@@ -86,7 +91,8 @@
                     price = :price,
                     address = :address,
                     area = :area,
-                    agent =:agent
+                    agent = :agent,
+                    available = :available
                 WHERE
                     id = :id';
 
@@ -98,12 +104,14 @@
             $this->address = htmlspecialchars(strip_tags($this->address));
             $this->area = htmlspecialchars(strip_tags($this->area));
             $this->agent = htmlspecialchars(strip_tags($this->agent));
+            $this->available = htmlspecialchars(strip_tags($this->available));
             $this->id = htmlspecialchars(strip_tags($this->id));
 
             // Bind Data
             $stmt->bindParam(':price', $this->price);
             $stmt->bindParam(':address', $this->address);
             $stmt->bindParam(':area', $this->area);
+            $stmt->bindParam(':available', $this->available);
             $stmt->bindParam(':agent', $this->agent);
             $stmt->bindParam(':id', $this->id);
 
@@ -117,7 +125,7 @@
             return false;
         }
 
-        // Delete Property
+        // Delete Listing
         public function delete() {
             // Create query
             $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';

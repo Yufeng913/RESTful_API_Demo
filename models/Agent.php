@@ -1,6 +1,7 @@
+
 <?php
     class Agent {
-        // DB
+        // DB stuff
         private $conn;
         private $table = 'agent';
 
@@ -15,24 +16,22 @@
         // Constructor with DB
         public function __construct($db){
             $this->conn = $db;
-        }
+        }       
 
-        // 
+        // Get Agents
         public function read() {
-            //
-            $query = 'SELECT 
-                a.name as agent_name,
-                p.id,
-                p.category_id,
-                p.age,
-                p.email,
-                p.created_at
+            // Create query
+            $query = 'SELECT
+                id,
+                agent_name,
+                age,
+                email,
+                category_id,
+                created_at
             FROM
-            ' . $this->table . ' p
-            LEFT JOIN
-               agent a ON p.category_id = a.id     
+                ' . $this->table . '
             ORDER BY
-                p.created_at DESC';
+                created_at ASC';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -40,26 +39,23 @@
             // Execute query
             $stmt->execute();
 
-            return $stmt;
-        
+            return $stmt;        
         }
 
         // Get single query
         public function read_single(){
-             //
-             $query = 'SELECT 
-             a.name as agent_name,
-             p.id,
-             p.category_id,
-             p.age,
-             p.email,
-             p.created_at
-         FROM
-            ' . $this->table . ' p
-         LEFT JOIN
-            agent a ON p.category_id = a.id     
-         WHERE
-             p.id = ?
+            // create query
+            $query = 'SELECT
+                id,
+                agent_name,
+                age,
+                email,
+                category_id,
+                created_at
+            FROM
+                ' . $this->table . '      
+            WHERE
+                id = ?
         LIMIT 0,1';
 
         // Prepare statement

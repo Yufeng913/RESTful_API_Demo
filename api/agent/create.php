@@ -12,10 +12,10 @@
     $database = new Database();
     $db = $database->connect();
 
-    // Instantiate new post object
+    // Instantiate new agent object
     $post = new Agent($db);
 
-    // Get raw posted data
+    // Get raw agent data
     $data = json_decode(file_get_contents("php://input"));
     
     $post->agent_name = $data->agent_name;

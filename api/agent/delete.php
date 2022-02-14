@@ -12,23 +12,23 @@
     $database = new Database();
     $db = $database->connect();
 
-    // Instantiate new post object
+    // Instantiate new agent object
     $post = new Agent($db);
 
-    // Get raw posted data
+    // Get raw agent data
     $data = json_decode(file_get_contents("php://input"));
 
     // Set ID to update
     $post->id = $data->id;
 
-    // Delete post
+    // Delete agent
     if ($post->delete()) {
         echo json_encode(
-            array('message' => 'Post Deleted')
+            array('message' => 'Agent Deleted')
         );
     } else {
         echo json_encode(
-            array('message' => 'Post Not Deleted')
+            array('message' => 'Agent Not Deleted')
             );
     }
     

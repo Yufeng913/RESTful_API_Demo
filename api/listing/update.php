@@ -6,34 +6,35 @@
     header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
     include_once '../../config/Database.php';
-    include_once '../../models/Agent.php';
+    include_once '../../models/Listing.php';
 
     // Instantiate DB & connect
     $database = new Database();
     $db = $database->connect();
 
-    // Instantiate new post object
-    $post = new Agent($db);
+    // Instantiate new property object
+    $listing = new Listing($db);
 
-    // Get raw posted data
+    // Get raw listing data
     $data = json_decode(file_get_contents("php://input"));
 
     // Set ID to update
-    $post->id = $data->id;
+    $listing->id = $data->id;
     
-    $post->agent_name = $data->agent_name;
-    $post->age = $data->age;
-    $post->email = $data->email;
-    $post->category_id = $data->category_id;
+    $listing->price = $data->price;
+    $listing->address = $data->address;
+    $listing->area = $data->area;
+    $listing->agent = $data->agent;
+    $listing->available = $data->available;
 
-    // Update post
-    if ($post->update()) {
+    // Update listing
+    if ($listing->update()) {
         echo json_encode(
-            array('message' => 'Agent Updated')
+            array('message' => 'Listing Updated')
         );
     } else {
         echo json_encode(
-            array('message' => 'Agent Not Updated')
+            array('message' => 'Listing Not Updated')
             );
     }
     

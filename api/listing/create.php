@@ -2,38 +2,36 @@
     // Headers
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
-    header('Access-Control-Allow-Methods: PUT');
+    header('Access-Control-Allow-Methods: POST');
     header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
     include_once '../../config/Database.php';
-    include_once '../../models/Agent.php';
+    include_once '../../models/Listing.php';
 
     // Instantiate DB & connect
     $database = new Database();
     $db = $database->connect();
 
-    // Instantiate new post object
-    $post = new Agent($db);
+    // Instantiate new listing object
+    $listing = new Listing($db);
 
-    // Get raw posted data
+    // Get raw listing data
     $data = json_decode(file_get_contents("php://input"));
-
-    // Set ID to update
-    $post->id = $data->id;
     
-    $post->agent_name = $data->agent_name;
-    $post->age = $data->age;
-    $post->email = $data->email;
-    $post->category_id = $data->category_id;
+    $listing->price = $data->price;
+    $listing->address = $data->address;
+    $listing->area = $data->area;
+    $listing->agent = $data->agent;
+    $listing->available = $data->available;
 
-    // Update post
-    if ($post->update()) {
+    // Create post
+    if ($listing->create()) {
         echo json_encode(
-            array('message' => 'Agent Updated')
+            array('message' => 'Listing Created')
         );
     } else {
         echo json_encode(
-            array('message' => 'Agent Not Updated')
+            array('message' => 'Listing Not Created')
             );
     }
     

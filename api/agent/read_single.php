@@ -16,7 +16,7 @@
     // Get ID
     $post->id = isset($_GET['id']) ? $_GET['id'] : die();
 
-    // Get post
+    // Get agent
     $post->read_single();
 
     // Create array

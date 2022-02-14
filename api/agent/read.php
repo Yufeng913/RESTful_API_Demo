@@ -42,9 +42,9 @@
         echo json_encode($posts_arr);
 
     } else {
-        // No Posts
+        // No Agents
         echo json_encode(
-            array('message' => 'No Posts Found')
+            array('message' => 'No Agents Found')
         );
     }
 
