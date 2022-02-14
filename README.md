@@ -7,7 +7,7 @@ Coded in PHP using Visual Studio Code
 Created in XAMPP  
 API platform for testing: Postman  
 
-The database contains the tables: **Agent, Property, and Listings**
+The database contains the tables: **Agent, Property, and Listing**
 
 ## File Structure (for relevant content):
 - config folder: contains database class for connection to MySQL using PDO.
@@ -43,19 +43,19 @@ The database contains the tables: **Agent, Property, and Listings**
 - created_at (current_timestamp)
 
 ## APIs
-- read.php (each table has their own respective GET API for reading the table)
+- **read.php** (each table has their own respective GET API for reading the table)
   - agent: **sorted** by created_at ascending
   - property: **sorted** by created_at descending
   - listing: **filtered** by available: YES
 
-- read_single.php
-  - reads a single entry by the specified ID for the **Agent** table *(list featured agent based on the ID)*  
+- **read_single.php**
+  - Reads a single entry by the specified ID for the **Agent** table *(list featured agent based on the ID)*  
 
-- create.php 
+- **create.php** 
   - Creates or adds (POST) an entry (specific API file for each table)
 
-- update.php 
+- **update.php** 
   - Updates (PUT) an existing entry (specific API file for each table)
 
-- delete.php 
+- **delete.php** 
   - Deletes an existing entry (specific API file for each table)
