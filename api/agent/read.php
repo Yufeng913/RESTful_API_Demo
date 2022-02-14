@@ -31,6 +31,7 @@
                 'id' => $id,
                 'agent_name' => $agent_name,
                 'age' => $age,
+                'email' => $email,
                 'category_id' => $category_id
             );
             
